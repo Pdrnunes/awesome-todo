@@ -22,15 +22,17 @@
     <q-footer>
       <q-tabs>
         <q-route-tab
-          to="/"
-          icon="list"
-          label="Todo"
+          v-for="nav in navs"
+          :key="nav.label"
+          :to="nav.to"
+          :icon="nav.icon"
+          :label="nav.label"
         />
-        <q-route-tab
+        <!-- <q-route-tab
           to="/settings"
           icon="settings"
           label="Settings"
-        />
+        /> -->
       </q-tabs>
     </q-footer>
 
@@ -48,20 +50,23 @@
           Navigation
         </q-item-label>
         <q-item
-          to="/"
+          v-for="nav in navs"
+          :key="nav.label"
+          :to="nav.to"
           exact
           clickable
         >
           <q-item-section avatar>
-            <q-icon name="list" />
+            <q-icon :name="nav.icon" />
           </q-item-section>
 
           <q-item-section>
-            <q-item-label>Todo</q-item-label>
+            <q-item-label>{{nav.label}}</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item
+        <!-- commented because it will be replaced with v-for directive -->
+        <!-- <q-item
           to="/settings"
           exact
           clickable
@@ -73,7 +78,7 @@
           <q-item-section>
             <q-item-label>Settings</q-item-label>
           </q-item-section>
-        </q-item>
+        </q-item> -->
       </q-list>
     </q-drawer>
 
@@ -88,7 +93,24 @@ export default {
   name: 'MainLayout',
   data () {
     return {
-      leftDrawerOpen: false
+      leftDrawerOpen: false,
+      navs: [
+        {
+          label: 'Todo',
+          icon: 'list',
+          to: '/'
+        },
+        {
+          label: 'Settings',
+          icon: 'settings',
+          to: '/settings'
+        },
+        {
+          label: 'About',
+          icon: 'info',
+          to: '/about'
+        }
+      ]
     }
   }
 }
