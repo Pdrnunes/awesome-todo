@@ -110,13 +110,15 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
 @media screen and (min-width: 768px) {
   .q-footer {
     display: none;
   }
 }
-.q-drawer .q-router-link--exact-active {
-  color: white !important;
+.q-drawer {
+  .q-router-link--exact-active {
+    color: white !important;
+  }
 }
 </style>
