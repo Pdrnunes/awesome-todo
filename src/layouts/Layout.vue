@@ -1,21 +1,13 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <!-- view="lHh Lpr lFf" -> this is where i can change the  -->
+  <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
-        <q-toolbar-title>
-          Quasar App
+        <!-- style & identity > positioning for learning more about built-in vue classes -->
+        <q-toolbar-title class="absolute-center">
+          Awesome-Todo
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -36,24 +28,26 @@
       </q-tabs>
     </q-footer>
 
+    <!-- :breakpoint -> defines at what screen width the sidenav bar vanishes -->
+    <!-- :width -> defines the size of the buttons in the sidenav -->
+    <!-- content-class -> sets the colour of the sidenav | Style & identity > color pallete for colour codes -->
     <q-drawer
       v-model="leftDrawerOpen"
+      :width="250"
       :breakpoint="767"
       show-if-above
       bordered
-      content-class="bg-grey-1"
+      content-class="bg-primary"
     >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+      <q-list dark>
+        <q-item-label header>
           Navigation
         </q-item-label>
         <q-item
           v-for="nav in navs"
           :key="nav.label"
           :to="nav.to"
+          class="text-grey-4"
           exact
           clickable
         >
@@ -121,5 +115,8 @@ export default {
   .q-footer {
     display: none;
   }
+}
+.q-drawer .q-router-link--exact-active {
+  color: white !important;
 }
 </style>
