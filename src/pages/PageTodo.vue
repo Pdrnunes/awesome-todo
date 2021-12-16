@@ -6,10 +6,10 @@
       separator
       bordered
     >
-
+      <!-- now that the task structure no longer has access to the :key, the for directive needs these adjustments: -->
       <q-item
-        v-for="task in tasks"
-        :key="task.id"
+        v-for="(task, key) in tasks"
+        :key="key"
         @click="task.completed = !task.completed"
         clickable
         v-ripple
