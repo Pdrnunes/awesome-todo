@@ -7,54 +7,15 @@
       bordered
     >
       <!-- now that the task structure no longer has access to the :key, the for directive needs these adjustments: -->
-      <q-item
+      <task
         v-for="(task, key) in tasks"
         :key="key"
-        @click="task.completed = !task.completed"
-        clickable
-        v-ripple
-        :class="!task.completed ? 'bg-cyan-1' : 'bg-green-12'"
+        :task="task"
+        :id="key"
       >
-        <q-item-section
-          side
-          top
-        >
-          <q-checkbox v-model="task.completed" />
-        </q-item-section>
 
-        <q-item-section>
-          <q-item-label :class="{'text-strike' : task.completed }">{{task.name}}</q-item-label>
-        </q-item-section>
+      </task>
 
-        <q-item-section side>
-          <div class="row">
-            <!-- vue components > icon for more info -->
-            <div class="column justify-center">
-              <q-icon
-                class="q-mr-xs"
-                name="event"
-                size="18px"
-              />
-            </div>
-            <div class="column">
-              <!-- class row to make it into a row, justify-end to push the label to the right end of the page -->
-              <q-item-label
-                class="row justify-end"
-                caption
-              >
-                {{task.dueDate}}
-              </q-item-label>
-              <q-item-label
-                class="row justify-end"
-                caption
-              >
-                <small>{{task.dueTime}}</small>
-              </q-item-label>
-            </div>
-          </div>
-
-        </q-item-section>
-      </q-item>
     </q-list>
   </q-page>
 </template>
@@ -75,6 +36,10 @@ export default {
     ...mapGetters('tasks', ['tasks'])
     /* There is another way to do it by maping it directly to the getter: */
 
+  },
+  components: {
+    'task': require('components/tasks/Task.vue').
+      default
   }
 
   /* when the getters are ready to use the data property is no longer needed, so i'm commenting it */
