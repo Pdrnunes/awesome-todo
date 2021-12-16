@@ -2,7 +2,10 @@
   <!-- q- :: p for padding or m for margin :: a for all directions of the page or r, l, t, b :: - :: md for medium or sm for small or lg for large -->
   <!-- style and identity > spacing -->
   <q-page class="q-pa-md">
-    <q-list bordered>
+    <q-list
+      separator
+      bordered
+    >
 
       <q-item
         v-for="task in tasks"
@@ -10,6 +13,7 @@
         @click="task.completed = !task.completed"
         clickable
         v-ripple
+        :class="!task.completed ? 'bg-cyan-1' : 'bg-green-12'"
       >
         <q-item-section
           side
@@ -19,7 +23,7 @@
         </q-item-section>
 
         <q-item-section>
-          <q-item-label>{{task.name}}</q-item-label>
+          <q-item-label :class="{'text-strike' : task.completed }">{{task.name}}</q-item-label>
         </q-item-section>
 
         <q-item-section side>
