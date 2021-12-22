@@ -1,6 +1,9 @@
 <template>
+  <!-- id: id -> the id is available due to props -->
+  <!-- property updates: -> contain the updates that will be send -->
+  <!-- in this case completed set to the oposite of task.completed -->
   <q-item
-    @click="task.completed = !task.completed"
+    @click="updateTask({id: id, updates: {completed: !task.completed}})"
     clickable
     v-ripple
     :class="!task.completed ? 'bg-cyan-1' : 'bg-green-12'"
@@ -9,7 +12,10 @@
       side
       top
     >
-      <q-checkbox v-model="task.completed" />
+      <q-checkbox
+        :value="task.completed"
+        class="no-pointer-events"
+      />
     </q-item-section>
 
     <q-item-section>
@@ -48,8 +54,12 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-  props: ['task', 'id']
+  props: ['task', 'id'],
+  methods: {
+    ...mapActions('tasks', ['updateTask'])
+  },
 }
 </script>
 

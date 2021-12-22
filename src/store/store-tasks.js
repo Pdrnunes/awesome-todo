@@ -46,8 +46,13 @@ const state = {
   // ]
 }
 
+// Method that changes the state
 const mutations = {
-
+  updateTask (state, payload) {
+    console.log('payload from mutation: ', payload);
+    // object assign: copies the properties of one object to another:
+    Object.assign(state.tasks[payload.id], payload.updates) //first parameter is the object that we're assigning to. 
+  }
 }
 // getters basically returns something from the state
 const getters = {
@@ -57,8 +62,14 @@ const getters = {
   }
 }
 
+// Can be used to call mutations
 const actions = {
-
+  // actions expects an object:
+  // the commit function will call the mutation
+  updateTask ({ commit }, payload) {
+    commit('updateTask', payload)
+    // must be passed the name of the mutation function and the payload
+  }
 }
 // namespaced - allows the app to have multiple store modules
 export default {
